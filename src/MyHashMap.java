@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class MyHashMap<K, V> implements HashMapInterface<K, V> {
     private Entry<K, V>[] table;
     private int numOfKeys;
@@ -124,6 +126,23 @@ public class MyHashMap<K, V> implements HashMapInterface<K, V> {
         numOfKeys = 0;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+
+        for (int i = 0; i < table.length; i++) {
+            Entry<K, V> curr = table[i];
+
+            while (curr != null) {
+                result.append(curr.key).append(" -> ").append(curr.value).append("\n");
+                curr = curr.next;
+            }
+        }
+        return result.toString();
+    }
+    public void print() {
+        System.out.println(toString());
+    }
 
     private static class Entry<K, V> {
         K key;
@@ -134,6 +153,11 @@ public class MyHashMap<K, V> implements HashMapInterface<K, V> {
             this.key = key;
             this.value = value;
             next = null;
+        }
+
+        @Override
+        public String toString() {
+            return "Entry{" + "key=" + key + ", value=" + value + ", next=" + next + '}';
         }
     }
 
